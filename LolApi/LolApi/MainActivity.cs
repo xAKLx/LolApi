@@ -8,6 +8,7 @@ using Android.OS;
 using System.Net;
 using System.IO;
 using Newtonsoft.Json;
+using Android.Graphics;
 
 namespace LolApi
 {
@@ -65,9 +66,21 @@ namespace LolApi
                     tv.Append(champ.name + "\n");
                     tv.Append(champ.title + "\n");
                     tv.Append(champ.image.full + "\n");
+                    var img = new ImageView(this);
+
+                    var webClient = new WebClient();
+
+                    string version = "6.8.1";
+
+                    var url = new Uri(string.Format(@"http://ddragon.leagueoflegends.com/cdn/{0}/img/champion/{1}",version,champ.image.full));
 
                     
+                    var bytes = webClient.DownloadData(url); // get the downloaded data
+                    img.SetImageBitmap(BitmapFactory.DecodeByteArray(bytes,0,bytes.Length));
+
+
                     ly1.AddView(tv);
+                    ly1.AddView(img);
                 }
             };
         }
