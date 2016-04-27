@@ -30,7 +30,6 @@ namespace LolApi
             button.Click += delegate 
             {
                 
-
                 //http request
                 var apiKey = Personal.Personal.id;
                 var region = "lan";
